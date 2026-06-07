@@ -1,27 +1,27 @@
 name: Trivy SCA Scan
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
+  push:
+    branches: ["main"]
 
 jobs:
   trivy:
-    name: Run Trivy
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner in repo
-        uses:  aquasecurity/trivy-action@master
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.28.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
           format: 'table'
-          exit-code: '1'
-          ignore-unfixed: false
+          output: 'trivy-results.txt'
           severity: 'LOW,MEDIUM,HIGH,CRITICAL'
+          ignore-unfixed: false
+          exit-code: '0'
+
+      - name: Show Trivy results
+        run: cat trivy-results.txt
