@@ -23,5 +23,5 @@ jobs:
           scan-ref: '.'
           format: 'table'
           exit-code: '1'
-          ignore-unfixed: true
+          ignore-unfixed: false
           severity: 'LOW,MEDIUM,HIGH,CRITICAL'
