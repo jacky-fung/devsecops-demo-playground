@@ -1,22 +1,16 @@
-name: Trivy SCA Scan
+name: Trivy Image Scan Demo
 
 on:
   workflow_dispatch:
-  push:
-    branches: ["main"]
 
 jobs:
   trivy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy against vulnerable image
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
+          image-ref: 'python:3.7'
           format: 'table'
           output: 'trivy-results.txt'
           severity: 'LOW,MEDIUM,HIGH,CRITICAL'
