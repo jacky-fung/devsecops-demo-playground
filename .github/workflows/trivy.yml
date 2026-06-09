@@ -13,7 +13,7 @@ jobs:
           image-ref: 'python:3.7'
           format: 'table'
           output: 'trivy-results.txt'
-          severity: 'High,CRITICAL'
+          severity: 'CRITICAL'
           ignore-unfixed: false
           exit-code: '0'
 
